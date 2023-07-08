@@ -227,7 +227,16 @@ def is_floating_point(operand):  # 1 if true, 0 if not
     """ is a floating point"""
     return number_but_not_integer(operand, '.')
 
-
+def match_types(my_str: str):
+    """Convert the string to the datatype that it represents"""
+    if is_integer(my_str):
+        return int(my_str)
+    if is_floating_point(my_str) or is_ratio(my_str):
+        return float(my_str)
+    if is_complex(my_str):
+        return complex(my_str)
+    return my_str # keep it otherwise a string
+        
 # used in a wrapper for operand list when the operands can be from more than 1 kind
 def get_data_type(operand):
     """ Gets the data type of an operand """
@@ -901,16 +910,21 @@ def extract(expression):
 
 
 def eval_lisp(lisp_code: str):
+    """ The method receives a string that represents a lisp expression and evaluates it.
+    The result is returned
+    """
     clean_code = clean_input(lisp_code)
     result = simplify_layers(clean_code)
-    return result
+    typed_result = match_types(result)
+    return typed_result
 
 
 def run():
     """ The main method."""
+
     intro_font = Figlet(font='standard')
     print(intro_font.renderText('LISPER '), end='')
-    print('Version 1.0.2')
+    print('Version 1.0.3')
 
     try:
         user_choice = clean_input(
@@ -956,3 +970,5 @@ def run():
                     run_a_list_of_code(lines_of_code)
     except KeyboardInterrupt as kb:
         print(' \n EXECUTION HAS BEEN CLOSED BY THE USER')
+
+run()

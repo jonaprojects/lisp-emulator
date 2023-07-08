@@ -22,7 +22,18 @@ First, you need to import the library:
 ```python
 from lisp_emulator.common_lisp import *
 ```
-You can
+You can evaluate a lisp expression using the `eval_lisp` command. 
+
+```python
+result = eval_lisp("( + 3 2 )")
+print(result) # 5 
+```
+
+### Lisp-Like Syntax
+
+As mentioned, the supported syntax is similar to lisp, and more specifically to the Common Lisp dialect.
+In this section of the documentation, we'll dive in into the different supported features in this special syntax.
+
 ### **Arithmetic Operators**
   The most fundamental operations are addition (`+`), subtraction (`-`), multiplication(`*`) and division (`/`).
 Those operators are of course supported and can receive an unlimited number of parameters.
@@ -117,7 +128,7 @@ power of E ( 2.71828182846 ) by that number.
 Denominator Operation.
 - `ABS` - receives a parameter, and returns its absolute value.
 
-## Creating Variables
+### **Creating Variables**
 You can define new variables via the `SET` and `SETQ` methods
 ( `defvar`, `defparameter` keywords are not implemented yet )
 
