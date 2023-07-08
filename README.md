@@ -1,4 +1,4 @@
-# **Lisp Emulator - Version 1.0.2**
+# **Lisp Emulator - Version 1.0.3**
 
 ## **Intro**
 Lisp is a **functional** programming language, first introduced in the late 1950s by John McCarthy, a renowned computer scientist. Since then, many dialects of Lisp have been developed, with Common Lisp and Scheme being the main dialects nowadays.
@@ -11,7 +11,7 @@ The project focuses on emulating a basic environment resembling Common Lisp synt
 
 ## **Installation**
 
-You can install the project from pip via the following the command:
+You can install the project from pip via the following command:
 ``` 
 pip install lisp-emulator
 ```
