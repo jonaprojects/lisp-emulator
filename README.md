@@ -18,6 +18,11 @@ pip install lisp-emulator
 
 ## **Usage** 
 
+First, you need to import the library:
+```python
+from lisp_emulator.common_lisp import *
+```
+You can
 ### **Arithmetic Operators**
   The most fundamental operations are addition (`+`), subtraction (`-`), multiplication(`*`) and division (`/`).
 Those operators are of course supported and can receive an unlimited number of parameters.
