@@ -1,16 +1,24 @@
-# Lisp Emulator - Version 1.0.2
+# **Lisp Emulator - Version 1.0.2**
 
-## About Lisp
+## **Intro**
 Lisp is a **functional** programming language, first introduced in the late 1950s by John McCarthy, a renowned computer scientist. Since then, many dialects of Lisp have been developed, with Common Lisp and Scheme being the main dialects nowadays.
 
 Lisp is written in a prefix notation, and the code is always inside parenthesis.
 It is also not case sensitive, however feel free to follow the
 <a href="https://lisp-lang.org/style-guide/"> most updated conventions </a>.
 
-## About the project
 The project focuses on emulating a basic environment resembling Common Lisp syntax and other compatible older versions. All of the code is written in Python.
 
-## Arithmetic Operators
+## **Installation**
+
+You can install the project from pip via the following the command:
+``` 
+pip install lisp-emulator
+```
+
+## **Usage** 
+
+### **Arithmetic Operators**
   The most fundamental operations are addition (`+`), subtraction (`-`), multiplication(`*`) and division (`/`).
 Those operators are of course supported and can receive an unlimited number of parameters.
 
@@ -27,7 +35,7 @@ Here are some examples of basic calculations:
 
 
 
-## Output
+### **Output**
 
 You can use the `PRINT` or `WRITE` commands. For example:
 
@@ -37,7 +45,7 @@ You can use the `PRINT` or `WRITE` commands. For example:
 ```
 
 
-## Predicates
+### **Predicates**
 
 Predicates return a boolean-like value - T (for true), and NIL (the equivalent of false).
 
@@ -49,20 +57,20 @@ Predicates return a boolean-like value - T (for true), and NIL (the equivalent o
 - `NUMBERP` - evaluates to T if the value is a number, else to NIL
 - `STRINGP` - evaluates to T if the value is a string (by the double quotation ".." mark), else to NIL
 
-## Equality Operation
+### **Equality Operation**
 
 Equality can be performed via the = operator that can receive
 an indefinite number of parameters or the EQ method that receives only 2 parameters.
 Those methods return T if all the expressions are equal, else NIL.
 
-## Mathematical Operations And Constants
+### **Mathematical Operations And Constants**
 
 PI Constant - PI is a global constant, and represents
 approximately 3.1415926535.
 E Constant - E is a global constant, and represents approximately
 2.71828182846.
 
-## Trigonometric operations
+### **Trigonometric operations**
 
 All of the trignonometric operations are handled in *radians*, rather than degrees.
 Here is a full list of the supported trigonometric functions;
@@ -92,7 +100,7 @@ For instance:
 ( sin ( / PI 2 ) ) ; 1.0
 ```
 
-## Other mathematical operations
+### **Other mathematical operations**
 - `SQRT` - receives a parameter and returns its square root
 - `EXPT` - receives two parameters and returns the power of the first
 parameter by the second.
@@ -115,21 +123,21 @@ For example:
 ( + 3 number 4 ) ; 12
 ```
 
-## Conditionals
+### **Conditionals**
 
 Conditions are created via IF expressions
 
-## String Operations
+### **String Operations**
 Concatenate - receives N strings and evaluates to their concatenation.
 For example,
 
-## DATA TYPES
-`str` - strings. A sequence of characters, sorrounded by double quotes.
-for example: "hello" , "world".
-`int` - integers. for example: 6, -3 ,2.
-`dec` - decimal numbers
+### **Data Types**
+There are currently only 3 supported datatypes in the project: strings, integers and decimals.
+`str` - strings. A sequence of characters, sorrounded by double quotes. For example: "hello" , "world".
+`int` - integers. For example: 6, -3 ,2.
+`dec` - decimal numbers. For instance, 6.1, 2.23, etc...
 
-## Predicates
+### **Predicates**
 Predicates return a boolean-like value - T (for true)
 , and NIL (the equivalent of false).
 
@@ -142,14 +150,16 @@ Predicates return a boolean-like value - T (for true)
 - `STRINGP` - evaluates to `T` if the value is string (by the double quotation ".." mark)
 else, to NIL
 
-## Equality Operation
+### **Equality Operation**
 
 Equality can be performed via the = operator that can receive
 an indefinite number of parameters or the EQ method that receives only 2 parameters.
 Those methods return T if all the expressions are equal, else NIL.
 
-## Mathematical Operations And Constants
+### **Constants**
 
-`PI` Constant - PI is a global constant, and represents
+You can use these global constants anywhere in your program.
+
+- `PI` Constant - PI is a global constant, and represents
 approximately 3.1415926535.
-`E `Constant - E is a global constant, and represents approximately 2.71828182846.
+- `E `Constant - E is a global constant, and represents approximately 2.71828182846.
