@@ -8,20 +8,22 @@ signs = [' ', '"', "'"]
 type_signs = ['"', "'"]
 agreement = ['YES', 'YE', 'OF COURSE', 'INDEED', 'YEP', 'POSITIVE', 'ABSOLUTELY', 'DEFINITELY'
                                                                                   'OK', 'FINE']
-not_sure = ['MAYBE', 'MAY BE', 'PERHAPS', "I DON'T KNOW", "I DONT KNOW", 'IDK', 'PROBABLY']
+not_sure = ['MAYBE', 'MAY BE', 'PERHAPS',
+            "I DON'T KNOW", "I DONT KNOW", 'IDK', 'PROBABLY']
 # Functions
 built_in_functions = ['+', '-', '*', '/', '=', 'WRITE', 'PRINT', 'EQ', 'CONCATENATE', 'MAX', 'MIN', 'IF', 'DEFUN',
-                      'DEFGENERIC', 'SET', 'SETQ', 'SETF', 'LIST', 'CONS', 'QUOTE', 'COMPLEX', 'GCD', 'SIN', 'ASIN'
-    , 'COS', 'ACOS', 'TAN', 'ATAN', 'CTAN', 'ACTAN','SINH','COSH','TANH','ASINH','ACOSH','ATANH' 'ABS', 'SQRT','EXP',''
-        'EXPT', 'ZEROP', 'EVENP', 'ODDP', 'ZEROP', 'NULL', 'LESSP', 'GREATERP', 'NUMBERP','STRINGP']
+                      'DEFGENERIC', 'SET', 'SETQ', 'SETF', 'LIST', 'CONS', 'QUOTE', 'COMPLEX', 'GCD', 'SIN', 'ASIN', 'COS', 'ACOS', 'TAN', 'ATAN', 'CTAN', 'ACTAN', 'SINH', 'COSH', 'TANH', 'ASINH', 'ACOSH', 'ATANH' 'ABS', 'SQRT', 'EXP', ''
+                      'EXPT', 'ZEROP', 'EVENP', 'ODDP', 'ZEROP', 'NULL', 'LESSP', 'GREATERP', 'NUMBERP', 'STRINGP']
 
-variable_types = ['sym', 'str', 'int', 'ratio', 'dec', 'clex', 'vec', 'lst', 'T', 'NIL']
+variable_types = ['sym', 'str', 'int', 'ratio',
+                  'dec', 'clex', 'vec', 'lst', 'T', 'NIL']
 lists = []  # lists of nodes, perhaps
 variables = []
 new_functions = {
 
 }
-trigo = ['SIN', 'ASIN', 'COS', 'ACOS', 'TAN', 'ATAN', 'SINH','ASINH', 'COSH', 'ACOSH', 'TANH', 'ATANH']
+trigo = ['SIN', 'ASIN', 'COS', 'ACOS', 'TAN', 'ATAN',
+         'SINH', 'ASINH', 'COSH', 'ACOSH', 'TANH', 'ATANH']
 lines_of_code = []  # lines of code used mainly for TEXT EDITOR and FILE modes
 
 
@@ -84,13 +86,16 @@ def number_but_not_integer(operand, sign):
 
 def is_even(number):
     """ Returns T if the number is even, else, return NIL"""
-    if not isinstance(number,int): # if the number isn't of type int, try to convert it to int.
+    if not isinstance(number, int):  # if the number isn't of type int, try to convert it to int.
         try:
-            if isinstance(number, str) and is_integer(number) == 1: # if it's of type str and it can be converted to int
+            # if it's of type str and it can be converted to int
+            if isinstance(number, str) and is_integer(number) == 1:
                 number = int(number)
-            else: # if not, then it's considered as invalid - thus a type error is raised.
+            # if not, then it's considered as invalid - thus a type error is raised.
+            else:
                 raise TypeError()
-        except TypeError: # the type error is handled here. An error message to the user will be returned.
+        # the type error is handled here. An error message to the user will be returned.
+        except TypeError:
             return f"EVENP: {number} is not an integer "
     if number % 2 == 0:  # if the reesult number modulu 2 equals 0, it's an even , so return T .
         return 'T'
@@ -99,8 +104,8 @@ def is_even(number):
 
 def is_odd(number):
     """ Returns T if the number is odd, else, return NIL"""
-    if is_even(number) == 'T': # just return the opposite from the is_even method.
-         return 'NIL'
+    if is_even(number) == 'T':  # just return the opposite from the is_even method.
+        return 'NIL'
     return 'T'
 
 
@@ -120,7 +125,8 @@ def is_complex(expression):
         if first_bracket_index < 0 or end_expression_index < 0 or end_expression_index < first_bracket_index:
             # check if the brackets are not placed validly.
             return False
-        operands = expression[3:-1].strip().split()  # splits what's inside the brackets into a list
+        # splits what's inside the brackets into a list
+        operands = expression[3:-1].strip().split()
         if len(operands) > 2 or len(operands) == 0:
             return False
         if len(operands) == 1:
@@ -129,7 +135,8 @@ def is_complex(expression):
     return False
 
 
-def simplify_complex(complex_number):  # receives #C(A B ) and returns ( +  A ( * B i )  )
+# receives #C(A B ) and returns ( +  A ( * B i )  )
+def simplify_complex(complex_number):
     operands = complex_number[3:-1].strip().split()
     return operands[0], operands[1]
     # return ' ( + {} ( *  {} i ) ) '.format(operands[0],operands[1])
@@ -197,7 +204,8 @@ def is_ratio(operand):  # 1 if true, 0 if not
     return number_but_not_integer(operand, '/')
 
 
-def one_type_in_list(lst, data_type):  # used when the operands must be of only 1 type.
+# used when the operands must be of only 1 type.
+def one_type_in_list(lst, data_type):
     # For example, concatenate must get only string values.
     """ checks if all of the operands in the given list are in the same given type"""
     if data_type == 'str':
@@ -219,8 +227,18 @@ def is_floating_point(operand):  # 1 if true, 0 if not
     """ is a floating point"""
     return number_but_not_integer(operand, '.')
 
-
-def get_data_type(operand):  # used in a wrapper for operand list when the operands can be from more than 1 kind
+def match_types(my_str: str):
+    """Convert the string to the datatype that it represents"""
+    if is_integer(my_str):
+        return int(my_str)
+    if is_floating_point(my_str) or is_ratio(my_str):
+        return float(my_str)
+    if is_complex(my_str):
+        return complex(my_str)
+    return my_str # keep it otherwise a string
+        
+# used in a wrapper for operand list when the operands can be from more than 1 kind
+def get_data_type(operand):
     """ Gets the data type of an operand """
     if operand is None or operand == '':
         return ''
@@ -412,7 +430,8 @@ def simplify_s_expression(s_expression):
                     operand = operand_type.value
                     operand_type = get_data_type(operand)
                     if operand_type != 'str':
-                        raise Exception('Concatenate Macro Receives Only Strings')
+                        raise Exception(
+                            'Concatenate Macro Receives Only Strings')
                 accumulator += operand[1:-1]
             return '"' + accumulator + '"'
             # if one_type_in_list(operands, 'str'):
@@ -421,7 +440,8 @@ def simplify_s_expression(s_expression):
         elif command == 'MAX':  # *********************************  MAX METHOD  **********************
             op = operands[0]
             operand_type = get_data_type(op)
-            if isinstance(operand_type, Variable):  # if it's a variable, extract the value and its type
+            # if it's a variable, extract the value and its type
+            if isinstance(operand_type, Variable):
                 op = operand_type.value
                 operand_type = get_data_type(op)
             if operand_type == 'int':
@@ -431,13 +451,15 @@ def simplify_s_expression(s_expression):
             elif operand_type == 'ratio':
                 max_number = ratio_to_decimal(operands[0])
             else:
-                raise Exception(f"{operands[0]}: type {get_data_type(operands[0])} . MAX receives only numbers")
+                raise Exception(
+                    f"{operands[0]}: type {get_data_type(operands[0])} . MAX receives only numbers")
             current = max_number
             del operands[0]
             for op in operands:
                 value = op
                 operand_type = get_data_type(op)
-                if isinstance(operand_type, Variable):  # if it's a variable, extract the value and its type
+                # if it's a variable, extract the value and its type
+                if isinstance(operand_type, Variable):
                     value = operand_type.value
                     operand_type = get_data_type(value)
                 if operand_type == 'int':
@@ -447,7 +469,8 @@ def simplify_s_expression(s_expression):
                 elif operand_type == 'ratio':
                     current = ratio_to_decimal(value)
                 else:
-                    raise Exception(f"{operands[0]}: type {get_data_type(operands[0])} . MAX receives only numbers")
+                    raise Exception(
+                        f"{operands[0]}: type {get_data_type(operands[0])} . MAX receives only numbers")
                 if current > max_number:
                     max_number = current
             return max_number
@@ -459,7 +482,8 @@ def simplify_s_expression(s_expression):
             elif is_ratio(operands[0]):
                 min_number = ratio_to_decimal(operands[0])
             else:
-                raise Exception(f"{operands[0]}: type {get_data_type(operands[0])} . MIN receives only numbers")
+                raise Exception(
+                    f"{operands[0]}: type {get_data_type(operands[0])} . MIN receives only numbers")
             current = min_number
             del operands[0]
             for op in operands:
@@ -470,7 +494,8 @@ def simplify_s_expression(s_expression):
                 elif is_ratio(op):
                     current = ratio_to_decimal(op)
                 else:
-                    raise Exception(f"{operands[0]}: type {get_data_type(operands[0])} . MIN receives only numbers")
+                    raise Exception(
+                        f"{operands[0]}: type {get_data_type(operands[0])} . MIN receives only numbers")
                 if current < min_number:
                     min_number = current
             return min_number
@@ -523,7 +548,8 @@ def simplify_s_expression(s_expression):
                 return f'INVALID NUMBER OF ARGUMENTS. EXPECTED 1, GOT {len(updated_operands)}'
             return str(sqrt(float(updated_operands[0])))
         elif command in trigo:
-            if len(updated_operands) != 1:  # **************************  TRIGONOMETRY  ******************************
+            # **************************  TRIGONOMETRY  ******************************
+            if len(updated_operands) != 1:
                 return f'INVALID NUMBER OF ARGUMENTS. EXPECTED 1, GOT {len(updated_operands)}'
             data_type = get_data_type(updated_operands[0])
             try:
@@ -592,7 +618,6 @@ def simplify_s_expression(s_expression):
             print('a user-defined function was called')
         else:
             print(f'COMMAND {command} DOES NOT EXISTS')
-        
 
 
 def simplify_layers(expression):
@@ -600,8 +625,10 @@ def simplify_layers(expression):
     if expression.startswith(';'):
         return
     if expression.startswith('(') and expression.endswith(')'):
-        while expression.startswith('(') and expression.endswith(')'):  # until one layer is left
-            start_index = expression.rfind('(')  # a method to check if it's inside a string. iterates from both sides
+        # until one layer is left
+        while expression.startswith('(') and expression.endswith(')'):
+            start_index = expression.rfind(
+                '(')  # a method to check if it's inside a string. iterates from both sides
             end_index = -1
             # print(f'start :{start_index}')
 
@@ -615,15 +642,17 @@ def simplify_layers(expression):
             deepest_expression = expression[start_index:end_index + 1]
             if start_index > 1:
                 if expression[start_index - 1] == 'C' and expression[
-                    start_index - 2] == '#':  # recognized a complex number
+                        start_index - 2] == '#':  # recognized a complex number
                     deepest_expression = '#C' + deepest_expression
             # print(deepest_expression)
             if check_valid_input(deepest_expression):
-                deepest_expression = simplify_s_expression(deepest_expression)  # deepest_expression becomes its value
+                deepest_expression = simplify_s_expression(
+                    deepest_expression)  # deepest_expression becomes its value
                 # print(deepest_expression)
             else:
                 raise Exception(f"Invalid Expression in {deepest_expression}")
-            expression = expression[:start_index] + str(deepest_expression) + expression[end_index + 1:]
+            expression = expression[:start_index] + \
+                str(deepest_expression) + expression[end_index + 1:]
         if expression.endswith(')'):
             return expression[:-1]
         return expression
@@ -663,11 +692,14 @@ class Variable:
     def __str__(self):
         """ Prints the data about the variable """
         return " {}'s value is {} and its type is {} ".format(self.name, self.value, self.var_type)
-        
+
+
 # GLOBAL VARIABLES AT THE LISP ENVIRONMENT !
-variables.append(Variable('I', 'clex'))  # should be in the start of the program. initializing i( root of -1 )
+# should be in the start of the program. initializing i( root of -1 )
+variables.append(Variable('I', 'clex'))
 variables.append(Variable('PI', str(pi)))
 variables.append(Variable('E', str(e)))
+
 
 class GenericNode:
     def __init__(self, value, next_node=None):
@@ -704,7 +736,8 @@ class GenericNode:
     def __eq__(self, other):
         """ checks if two GenericNode lists are equal """
         if not isinstance(other, GenericNode):
-            print(f"Can't compare between) {type(self)} and type {type(other)} ")
+            print(
+                f"Can't compare between) {type(self)} and type {type(other)} ")
             return False
         if self.get_length() != other.get_length():
             return False
@@ -839,7 +872,8 @@ def export_wrapper(lst_of_code=lines_of_code):
         answer = input('Do you want to save your work? ').strip().upper()
     if answer in agreement:
         print('Your code is:')
-        for line in lines_of_code: print(line)
+        for line in lines_of_code:
+            print(line)
         name_of_file = input("File's name:").strip()
         export_code_to_file(name_of_file, lst_of_code)
 
@@ -858,7 +892,8 @@ def extract(expression):
             j = i + 1  # i is the index of the " sign - therefore we increase the index in order to not include it
             while j < len(content) and content[j] != '"':
                 j += 1
-            operands.append(content[i:j + 1])  # add to the operands_list the characters between the " "
+            # add to the operands_list the characters between the " "
+            operands.append(content[i:j + 1])
             i = j
         else:
             if content[i] == ' ':
@@ -873,15 +908,27 @@ def extract(expression):
 
     return command, operands
 
+
+def eval_lisp(lisp_code: str):
+    """ The method receives a string that represents a lisp expression and evaluates it.
+    The result is returned
+    """
+    clean_code = clean_input(lisp_code)
+    result = simplify_layers(clean_code)
+    typed_result = match_types(result)
+    return typed_result
+
+
 def run():
     """ The main method."""
+
     intro_font = Figlet(font='standard')
     print(intro_font.renderText('LISPER '), end='')
-    print('Version 1.0.2')
-   
-    
+    print('Version 1.0.3')
+
     try:
-        user_choice = clean_input(input('Choose your mode: REPL, FILE, OR TEXT EDITOR  '))
+        user_choice = clean_input(
+            input('Choose your mode: REPL, FILE, OR TEXT EDITOR  '))
         if user_choice == 'REPL' or user_choice == 'CONSOLE':
             while True:
                 try:
@@ -895,7 +942,8 @@ def run():
                     lines_of_code.append(command)
                 except KeyboardInterrupt:
                     print()
-                    print('Program has stopped unexpectedly... Going back to the command line..')
+                    print(
+                        'Program has stopped unexpectedly... Going back to the command line..')
             export_wrapper(lines_of_code)
         elif user_choice == 'TEXT' or user_choice == 'TEXT EDITOR' or user_choice == 'EDITOR':
             # implement text editor mode here
@@ -923,3 +971,4 @@ def run():
     except KeyboardInterrupt as kb:
         print(' \n EXECUTION HAS BEEN CLOSED BY THE USER')
 
+run()
