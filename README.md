@@ -1,5 +1,7 @@
 # **Lisp Emulator - Version 1.0.3**
-
+![PyPI - Downloads](https://img.shields.io/pypi/dm/lisp-emulator)
+![GitHub](https://img.shields.io/github/license/jonaprojects/lisp-emulator)
+![GitHub issues](https://img.shields.io/github/issues/jonaprojects/lisp-emulator)
 ## **Intro**
 
 Lisp is a **functional** programming language, first introduced in the late 1950s by John McCarthy, a renowned computer scientist. Since then, many dialects of Lisp have been developed, with Common Lisp and Scheme being the main dialects nowadays.
